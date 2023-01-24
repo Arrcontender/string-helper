@@ -17,6 +17,7 @@ class InputedStringResource extends JsonResource
         return [
             'id' => $this->id,
             'inputed_string' => $this->inputed_string,
+            'language' => $this->language,
             'created_at' => $this->created_at
         ];
     }

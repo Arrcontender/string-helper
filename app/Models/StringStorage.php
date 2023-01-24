@@ -9,10 +9,6 @@ class StringStorage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['inputed_string'];
+    protected $fillable = ['inputed_string', 'language'];
 
-    public function getCheckedString()
-    {
-        return $this->hasOne('App\Models\CheckedStringStorage');
-    }
 }

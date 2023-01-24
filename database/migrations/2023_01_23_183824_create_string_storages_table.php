@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('string_storages', function (Blueprint $table) {
             $table->id();
             $table->text('inputed_string');
+            $table->string('language');
             $table->timestamps();
         });
     }

@@ -22,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResources([
     'inputed-strings' => InputedStringsController::class
 ]);
+
+Route::delete('destroy-all', [InputedStringsController::class, 'destroyAll']);
+
+Route::get('last-strings', [InputedStringsController::class, 'lastStrings']);

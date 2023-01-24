@@ -14,10 +14,10 @@
             Error while checking string!
         </div>
 
-        <h4 style="text-align: center;">history</h4>
+        <h4 style="text-align: center;">Last 5 strings</h4>
 
         <div v-for="string in strings">
-            <p style="text-align: center;"><span v-html="string.inputed_string"></span> | {{ string.language }}</p>
+            <p style="text-align: center;"><span v-html="string.inputed_string"></span> ({{ string.language }})</p>
         </div>
 
     </div>
@@ -47,7 +47,7 @@ export default {
                 })
         },
         getLastStrings() {
-            axios.get('/api/inputed-strings').then(response => {
+            axios.get('/api/last-strings').then(response => {
                 this.strings = response.data.data
             }).catch(error => {
                 console.log(error)

@@ -19,7 +19,7 @@ class InputedStringsController extends Controller
      */
     public function index()
     {
-        return InputedStringResource::collection(StringStorage::orderBy('created_at', 'desc')->take(10)->get());
+        return InputedStringResource::collection(StringStorage::orderBy('created_at', 'desc')->get());
     }
 
     /**
@@ -78,7 +78,17 @@ class InputedStringsController extends Controller
         StringStorage::where('id', $id)->delete();
     }
 
-    function checkLang($str)
+    public function destroyAll()
+    {
+        StringStorage::truncate();
+    }
+
+    public function lastStrings()
+    {
+        return InputedStringResource::collection(StringStorage::orderBy('created_at', 'desc')->take(5)->get());
+    }
+
+    public function checkLang($str)
     {
         $arrayString = mb_str_split($str);
         $engSymbolsLen = count(preg_grep('/[A-Za-z]/', $arrayString));
@@ -87,7 +97,7 @@ class InputedStringsController extends Controller
         return $mainLang;
     }
 
-    function replacedString($str)
+    public function replacedString($str)
     {
         $arrayString = mb_str_split($str);
         if ($this->checkLang($str) === 'rus') {

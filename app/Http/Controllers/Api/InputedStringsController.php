@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\StringStorage;
 use Dotenv\Store\StringStore;
 use App\Http\Resources\InputedStringResource;
+use Illuminate\Http\Response;
 
 
 class InputedStringsController extends Controller
@@ -18,7 +19,7 @@ class InputedStringsController extends Controller
      */
     public function index()
     {
-        return InputedStringResource::collection(StringStorage::all());
+        return InputedStringResource::collection(StringStorage::orderBy('created_at', 'desc')->take(10)->get());
     }
 
     /**
@@ -31,7 +32,7 @@ class InputedStringsController extends Controller
     {
         // $inputed_string = $request->inputed_string;
         $receivedArray = $request->only(['inputed_string']);
-        
+
         $receivedString = $receivedArray['inputed_string'];
 
         $lang = $this->checkLang($receivedString);
@@ -74,7 +75,7 @@ class InputedStringsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        StringStorage::where('id', $id)->delete();
     }
 
     function checkLang($str)
@@ -91,11 +92,9 @@ class InputedStringsController extends Controller
         $arrayString = mb_str_split($str);
         if ($this->checkLang($str) === 'rus') {
             $newStr = implode(array_map(fn($value) => preg_replace('/[A-Za-z]/', '<b>'.$value.'</b>', $value), $arrayString));
-            print_r($newStr);
             return $newStr;
         } else {
             $newStr = implode(array_map(fn($value) => mb_ereg_replace('[А-Яа-я]', '<b>'.$value.'</b>', $value), $arrayString));
-            print_r($newStr);
             return $newStr;
         }
     }

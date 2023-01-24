@@ -1,52 +1,58 @@
 <template>
     <div class="container">
-
         <h1 style="text-align: center;">History</h1>
-
-        <div class="row">
-            <div class="col-lg-4" v-for="folder in folder">
-                <h2 style="text-align: center;" class="card-title">{{ folder.name }}</h2>
-            </div>
-        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">String</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            
+                <tbody>
+                        <tr v-for="string in strings">
+                            <td scope="col" v-html="string.inputed_string"></td>
+                            <td scope="col">{{ string.language }}</td>
+                            <td scope="col"><button type="button" class="btn btn-danger mt-3" @click="deleteString(string.id)">Delete</button></td>
+                        </tr>
+                </tbody> 
+        </table>
     </div>
 </template>
 
 <script>
 export default {
-    data (){
+    data() {
         return {
-            string: [],
+            strings: [],
             errored: false,
-            loading: true,
         }
     },
     methods: {
-        checkString() {
-            axios.post('/api/V1/folder', {
-                    name: this.name,
-                    storage_id: this.storage_id
-                })
-                .then(response => {
-                    this.folder = []
-                    this.getAllFolders()
-                }).catch(error => {
-                    console.log(error)
-                    this.errored = true
-                })
-                .finally(() => this.loading = false)
-        },
-        getAllFolders() {
-            axios.get('/api/V1/folder').then(response => {
-                this.folder = response.data.data
+        getAllStrings() {
+            axios.get('/api/inputed-strings').then(response => {
+                this.strings = response.data.data
             }).catch(error => {
                 console.log(error)
                 this.errored = true
             })
-            .finally(() => this.loading = false)
         },
+        deleteString(id) {
+            axios.post('/api/inputed-strings/'+id, {
+                _method: 'DELETE'
+            })
+            .then(response => {
+                this.strings = []
+                this.getAllStrings()
+            }).catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+        }
     },
-    mounted(){
-        this.getAllFolders()
+    mounted() {
+        this.getAllStrings()
     }
 }
 </script>

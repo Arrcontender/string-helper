@@ -2,6 +2,10 @@
 
 The application is used to determine the language of the entered string (rus/eng) and highlight characters that are not included in the alphabet of the given string's language. The entered lines are saved in the history, from which they can be deleted later.
 
+![Checker](https://github.com/Arrcontender/string-helper/blob/main/public/Checker.png)
+
+![History](https://github.com/Arrcontender/string-helper/blob/main/public/History.png)
+
 Backend framework: Laravel
 
 Frontend framework: Vue.js

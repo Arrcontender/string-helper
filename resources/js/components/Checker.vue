@@ -4,11 +4,11 @@
         <h1 style="text-align: center;">String Checker</h1>
 
         <form @submit.prevent="inputString">
-            <div v-if="added_to_db" @blur="" v-html="inputed_string" contenteditable="true" class="form-control">
+            <div v-if="added_to_db" @blur="frontCheck" style="margin-bottom: 10pt;" v-html="inputed_string" contenteditable="true" class="form-control">
 
             </div>
             <div v-else class="mb-3">
-                <textarea type="text" v-model="inputed_string" class="form-control" placeholder="Input string here"></textarea>
+                <textarea style="margin-bottom: 10pt;" type="text" v-model="inputed_string" class="form-control" placeholder="Input string here"></textarea>
                 <button type="submit" class="btn btn-primary">Check string</button>
             </div>
         </form>
@@ -21,7 +21,7 @@
             Error while checking string!
         </div>
 
-        <h4 style="text-align: center;">Last 5 strings</h4>
+        <h4 style="text-align: center;">Last checked strings</h4>
 
         <div v-for="string in strings">
             <p style="text-align: center;"><span v-html="string.inputed_string"></span> ({{ string.language }})</p>

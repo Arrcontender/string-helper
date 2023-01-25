@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <div class="navbar-nav">
                     <router-link class="nav-item nav-link" to="/">Checker</router-link>
@@ -8,7 +8,7 @@
                 </div>
             </div>
         </nav>
-        <div>
+        <div style="margin-top: 10pt;">
             <router-view></router-view>
         </div>
     </div>

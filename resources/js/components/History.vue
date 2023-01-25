@@ -7,7 +7,7 @@
                 <tr>
                     <th scope="col">String</th>
                     <th scope="col">Language</th>
-                    <th scope="col" class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <th style="text-align:right" scope="col">
                         <button type="button" class="btn btn-danger" @click="deleteAllStrings()">Clear history</button>
                     </th>
                 </tr>
@@ -15,9 +15,9 @@
             
                 <tbody>
                         <tr v-for="string in strings">
-                            <td scope="col" v-html="string.inputed_string"></td>
-                            <td scope="col" style="text-align:center">{{ string.language }}</td>
-                            <td scope="col"><button type="button" class="btn btn-primary me-md-2" @click="deleteString(string.id)">Delete string</button></td>
+                            <td v-html="string.inputed_string"></td>
+                            <td>{{ string.language }}</td>
+                            <td style="text-align:right"><button type="button" class="btn btn-primary me-md-2" @click="deleteString(string.id)">Delete string</button></td>
                         </tr>
                 </tbody> 
         </table>

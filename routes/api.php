@@ -26,3 +26,5 @@ Route::apiResources([
 Route::delete('destroy-all', [InputedStringsController::class, 'destroyAll']);
 
 Route::get('last-strings', [InputedStringsController::class, 'lastStrings']);
+
+Route::get('show-last', [InputedStringsController::class, 'showLast']);

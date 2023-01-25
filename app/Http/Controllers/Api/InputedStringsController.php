@@ -55,6 +55,11 @@ class InputedStringsController extends Controller
         return new InputedStringResource(StringStorage::find($id));
     }
 
+    public function showLast()
+    {
+        return new InputedStringResource(StringStorage::orderBy('created_at', 'desc')->first());
+    }
+
     /**
      * Update the specified resource in storage.
      *

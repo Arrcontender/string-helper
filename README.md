@@ -1,6 +1,6 @@
 # String Helper
 
-The application is used to determine the language of the entered string and highlight characters that are not included in the alphabet of the given string's language. The entered lines are saved in the history, from which they can be deleted later.
+The application is used to determine the language of the entered string (rus/eng) and highlight characters that are not included in the alphabet of the given string's language. The entered lines are saved in the history, from which they can be deleted later.
 
 Backend framework: Laravel
 

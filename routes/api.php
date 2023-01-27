@@ -29,4 +29,4 @@ Route::get('last-strings', [InputedStringsController::class, 'lastStrings']);
 
 Route::get('show-last', [InputedStringsController::class, 'showLast']);
 
-Route::post('auto-check/{str}', [InputedStringsController::class, 'autoCheck']);
+Route::get('auto-check/{str}', [InputedStringsController::class, 'autoCheck']);

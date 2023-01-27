@@ -49,19 +49,19 @@ export default {
         }
     },
     methods: {
-        // Got to complete this function !!!!
-
-        // autoCheck() {
-        //     var elem = document.getElementById('checked').innerHTML;
-        //     axios.get('/api/auto-check/'+elem).then(response => {
-        //         console.log(response.data)
-        //         this.inputed_string = response.data
-        //         console.log(this.inputed_string)
-        //     }).catch(error => {
-        //         console.log(error)
-        //         this.errored = true
-        //     })
-        // },
+        autoCheck() {
+            var elem = (document.getElementById('checked').innerHTML);
+            elem = elem.replace(/(\<(\/?[^>]+)>)/g, '');
+            console.log(elem);
+            axios.get('/api/auto-check/' + elem).then(response => {
+                console.log(response.data)
+                this.inputed_string = response.data
+                console.log(this.inputed_string)
+            }).catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+        },
         checkedString() {
             axios.get('/api/show-last').then(response => {
                 this.inputed_string = response.data.data.inputed_string

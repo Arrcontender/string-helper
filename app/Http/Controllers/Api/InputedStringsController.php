@@ -12,44 +12,22 @@ use Illuminate\Http\Response;
 
 class InputedStringsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return InputedStringResource::collection(StringStorage::orderBy('created_at', 'desc')->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // $inputed_string = $request->inputed_string;
         $receivedArray = $request->only(['inputed_string']);
-
         $receivedString = $receivedArray['inputed_string'];
-
         $lang = $this->checkLang($receivedString);
-        
         $changedString = $this->replacedString($receivedString);
-
         $created_string = StringStorage::create(['language' => $lang, 'inputed_string' => $changedString]);
-
         return new InputedStringResource($created_string);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return new InputedStringResource(StringStorage::find($id));
@@ -60,24 +38,17 @@ class InputedStringsController extends Controller
         return new InputedStringResource(StringStorage::orderBy('created_at', 'desc')->first());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function autoCheck($str)
+    {
+        $changedString = $this->replacedString($str);
+        return $changedString;
+    }
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         StringStorage::where('id', $id)->delete();
@@ -92,6 +63,9 @@ class InputedStringsController extends Controller
     {
         return InputedStringResource::collection(StringStorage::orderBy('created_at', 'desc')->take(5)->get());
     }
+
+
+    // String cheching functions
 
     public function checkLang($str)
     {

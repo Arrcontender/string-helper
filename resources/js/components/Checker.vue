@@ -4,11 +4,13 @@
         <h1 style="text-align: center;">String Checker</h1>
 
         <form @submit.prevent="inputString">
-            <div v-if="added_to_db" @blur="frontCheck" style="margin-bottom: 10pt;" v-html="inputed_string" contenteditable="true" class="form-control">
+            <div v-if="added_to_db">
+                <div @blur="autoCheck" id="checked" style="margin-bottom: 10pt;" v-html="inputed_string" contenteditable="true" class="form-control">
 
+                </div>
             </div>
             <div v-else class="mb-3">
-                <textarea style="margin-bottom: 10pt;" type="text" v-model="inputed_string" class="form-control" placeholder="Input string here"></textarea>
+                <textarea onkeyup="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'" style="margin-bottom: 10pt;" type="text" v-model="inputed_string" class="form-control" placeholder="Input string here"></textarea>
                 <button type="submit" class="btn btn-primary">Check string</button>
             </div>
         </form>
@@ -20,6 +22,8 @@
         <div class="alert alert-danger" style="text-align: center; margin-top: 20pt;" role="alert" v-if="errored">
             Error while checking string!
         </div>
+
+
 
         <h4 style="text-align: center;">Last checked strings</h4>
 
@@ -40,16 +44,26 @@ export default {
             inputed_string: [],
             strings: [],
             errored: false,
-            added_to_db: false
+            added_to_db: false,
+            front_string: [],
         }
     },
     methods: {
-        frontCheck() {
-            
-        },
+        // Got to complete this function !!!!
+
+        // autoCheck() {
+        //     var elem = document.getElementById('checked').innerHTML;
+        //     axios.get('/api/auto-check/'+elem).then(response => {
+        //         console.log(response.data)
+        //         this.inputed_string = response.data
+        //         console.log(this.inputed_string)
+        //     }).catch(error => {
+        //         console.log(error)
+        //         this.errored = true
+        //     })
+        // },
         checkedString() {
             axios.get('/api/show-last').then(response => {
-                console.log(response.data.data.inputed_string)
                 this.inputed_string = response.data.data.inputed_string
             }).catch(error => {
                 console.log(error)

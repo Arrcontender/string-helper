@@ -16,6 +16,7 @@ ORM for PostgreSQL (Eloquent ORM)
 
     *  PHP >= 8.0.2
     *  PostgeSQL
+    *  Node.js >= 19.4.0
     *  Laravel >= 9.2
     *  Composer
 
